@@ -27,6 +27,7 @@ export default () => {
 
   const onLikeClick = () => {
     if (!data) return;
+
     mutate(
       (prev) =>
         prev && {
@@ -75,7 +76,7 @@ export default () => {
                   </span>
                 </div>
               </div>
-              <p className="max-w-[590px] text-xl mt-6">{data?.tweet.text}</p>
+              <p className="max-w-[640px] text-xl mt-6">{data?.tweet.text}</p>
               <div className="flex space-x-4 text-gray-500 mt-6">
                 <span>{String(data?.tweet.createdAt)}</span>
                 <div>
@@ -85,41 +86,32 @@ export default () => {
             </div>
             <div
               onClick={() => onLikeClick()}
-              className="cursor-pointer shadow-md select-none p-2 rounded-lg hover:bg-blue-50 absolute flex items-start space-x-3 right-10 bottom-4"
+              className="group cursor-pointer shadow-md select-none p-2 rounded-lg absolute flex items-start space-x-3 right-10 bottom-4"
             >
-              {data?.isLiked ? (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  className="w-6 h-6 fill-red-500 text-red-500"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                  />
-                </svg>
-              ) : (
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  className="w-6 h-6 text-gray-500"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
-                  />
-                </svg>
-              )}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                className={`w-6 h-6 ${
+                  data?.isLiked
+                    ? "fill-red-500 text-red-500"
+                    : "text-gray-500 group-hover:text-red-500"
+                }`}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                />
+              </svg>
 
-              <span className="text-lg text-gray-500">
+              <span
+                className={`group-hover:text-red-500 text-lg ${
+                  data?.isLiked ? "text-red-500" : "text-gray-500"
+                }`}
+              >
                 {data?.tweet._count.like}
               </span>
             </div>
